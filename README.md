@@ -210,8 +210,3 @@ cd frontend && npm run build
 # Serve dist/ with nginx
 ```
 
-
-
-## 🙏 Acknowledgements
-
-Built for INCOIS (Indian National Centre for Ocean Information Services) under the Ministry of Earth Sciences, Government of India.
