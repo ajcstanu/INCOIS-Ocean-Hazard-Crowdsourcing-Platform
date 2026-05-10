@@ -18,27 +18,48 @@ An integrated web + mobile platform for real-time citizen reporting of ocean haz
 
 ## 🏗️ Architecture
 
-```
-incois-platform/
-├── backend/          # Node.js + Express REST API
-│   ├── src/
-│   │   ├── models/      # Mongoose schemas
-│   │   ├── routes/      # API endpoints
-│   │   ├── middleware/  # Auth, validation, upload
-│   │   ├── services/    # NLP, social media, notifications
-│   │   └── utils/       # Helpers
-│   └── config/          # DB, env config
-├── frontend/         # React + Vite web app
-│   └── src/
-│       ├── components/  # Reusable UI components
-│       ├── pages/       # Route pages
-│       ├── hooks/       # Custom React hooks
-│       └── services/    # API calls
-├── mobile/           # React Native app (Expo)
-└── docs/             # API docs, architecture diagrams
-```
-
+incois-backend/
+├── main.py                  # App factory & entry point
+├── config/
+│   ├── settings.py          # Pydantic settings (reads .env)
+│   ├── database.py          # MongoDB / Beanie init
+│   └── redis.py             # Redis client + cache helper
+├── app/
+│   ├── models/              # Beanie document models
+│   │   ├── user.py
+│   │   ├── report.py
+│   │   ├── hotspot.py
+│   │   └── social_post.py
+│   ├── routes/              # FastAPI routers
+│   │   ├── auth.py
+│   │   ├── reports.py
+│   │   ├── hotspots.py
+│   │   ├── social.py
+│   │   ├── admin.py
+│   │   ├── analytics.py
+│   │   ├── ws.py            # WebSocket endpoint
+│   │   └── schemas/         # Pydantic request/response models
+│   ├── middleware/
+│   │   ├── auth.py          # JWT dependency + role guards
+│   │   ├── rate_limit.py    # SlowAPI limiter
+│   │   └── upload.py        # Cloudinary upload helper
+│   ├── services/
+│   │   ├── nlp_service.py   # Multilingual NLP pipeline
+│   │   ├── hotspot_service.py # DBSCAN clustering
+│   │   ├── social_media_service.py # Twitter ingestion
+│   │   ├── scheduler.py     # Background jobs (APScheduler)
+│   │   └── websocket_manager.py # WS broadcast manager
+│   └── utils/
+│       ├── security.py      # JWT + password helpers
+│       ├── logger.py        # Loguru setup
+│       └── seed_data.py     # DB seeder
+├── tests/
+│   └── test_auth.py
+├── Dockerfile
+├── docker-compose.yml
+└── requirements.txt
 ---
+
 
 ## 🚀 Quick Start
 
